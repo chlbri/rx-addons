@@ -23,3 +23,6 @@ vscode:
     - foxundermoon.shell-format
     - redhat.vscode-xml
     - hbenl.test-adapter-converter
+    - moalamri.inline-fold
+    - WallabyJs.quokka-vscode
+    - ms-playwright.playwright
