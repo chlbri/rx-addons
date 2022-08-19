@@ -1,0 +1,69 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "umd:main": "lib/index.umd.js",
+  "unpkg": "lib/index.umd.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "exports": {
+    "require": "./lib/index.cjs",
+    "default": "./lib/index.modern.js"
+  },
+  "scripts": {
+    "config": "pnpm install",
+    "start": "pnpm run config && microbundle watch",
+    "build": "rm -rf lib && microbundle",
+    "test": "jest",
+    "remove": "rm -rf lib node_modules pnpm-lock.yaml",
+    "clean": "pnpm run remove && pnpm run config",
+    "test-watch": "pnpm test -- --watch",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "eslint": "eslint \"{src/**/*,App}.{ts,tsx}\"",
+    "lint": "pnpm run prettier && pnpm run eslint --fix",
+    "lint-watch": "onchange --await-write-finish 5500 \"**/*\" -- pnpm run lint",
+    "postpublish": "git fetch & git pull",
+    "prepublishOnly": "pnpm run build && pnpm run lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write \"**/**.{ts,tsx,json,js,jsx,yml}\""
+    }
+  },
+  "name": "tobeChanged",
+  "author": "chlbri",
+  "module": "lib/index.esm.js",
+  "peerDependencies": {
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "xstate": "^4.33.2"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.2.239",
+    "@swc/jest": "^0.2.22",
+    "@types/jest": "^28.1.7",
+    "@types/node": "^18.7.6",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
+    "husky": "^8.0.1",
+    "jest": "27.5.0",
+    "jest-extended": "^3.0.2",
+    "microbundle": "^0.15.1",
+    "onchange": "^7.1.0",
+    "prettier": "^2.7.1",
+    "size-limit": "^8.0.1",
+    "typescript": "^4.7.4",
+    "xstate": "^4.33.2"
+  },
+  "wallaby": {
+    "slowTestThreshold": 200
+  }
+}
