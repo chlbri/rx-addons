@@ -5,8 +5,8 @@
       "type": "npm",
       "script": "start",
       "problemMatcher": [],
-      "label": "Start tsdx",
-      "detail": "Starting all building off tsdx",
+      "label": "Start microbundle",
+      "detail": "Starting all building off Microbundle",
       "runOptions": {
         "runOn": "folderOpen"
       },

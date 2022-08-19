@@ -21,7 +21,8 @@
     "config": "pnpm install",
     "start": "pnpm run config && microbundle watch",
     "build": "rm -rf lib && microbundle",
-    "test": "jest",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "remove": "rm -rf lib node_modules pnpm-lock.yaml",
     "clean": "pnpm run remove && pnpm run config",
     "test-watch": "pnpm test -- --watch",
@@ -37,31 +38,29 @@
       "pre-commit": "prettier --write \"**/**.{ts,tsx,json,js,jsx,yml}\""
     }
   },
-  "name": "tobeChanged",
+  "name": "rx-addons",
   "author": "chlbri",
   "module": "lib/index.esm.js",
   "peerDependencies": {
+    "rxjs": "^7.5.6",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4",
-    "xstate": "^4.33.2"
+    "typescript": "^4.7.4"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.239",
-    "@swc/jest": "^0.2.22",
-    "@types/jest": "^28.1.7",
     "@types/node": "^18.7.6",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
+    "@vitest/coverage-c8": "^0.22.1",
     "eslint": "^8.22.0",
     "husky": "^8.0.1",
-    "jest": "27.5.0",
-    "jest-extended": "^3.0.2",
     "microbundle": "^0.15.1",
     "onchange": "^7.1.0",
     "prettier": "^2.7.1",
+    "rxjs": "^7.5.6",
     "size-limit": "^8.0.1",
+    "tslib": "^2.4.0",
     "typescript": "^4.7.4",
-    "xstate": "^4.33.2"
+    "vitest": "^0.22.1"
   },
   "wallaby": {
     "slowTestThreshold": 200
