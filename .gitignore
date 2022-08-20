@@ -4,6 +4,7 @@
 #For Libraries
 lib
 dist
+coverage
 
 #
 ### Node ###
