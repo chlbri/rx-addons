@@ -1,28 +1,21 @@
 {
   "version": "0.1.1",
   "license": "MIT",
-  "type": "module",
   "main": "lib/index.js",
-  "umd:main": "lib/index.umd.js",
-  "unpkg": "lib/index.umd.js",
+  "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
   "files": [
-    "lib",
-    "src"
+    "lib"
   ],
   "engines": {
     "node": ">=12"
   },
-  "exports": {
-    "require": "./lib/index.cjs",
-    "default": "./lib/index.modern.js"
-  },
   "scripts": {
     "config": "pnpm install",
     "start": "pnpm run config && pnpm run build --watch",
-    "build": "rm -rf lib && microbundle",
+    "build": "rm -rf lib && rollup -c",
     "test": "vitest run",
-    "coverage": "vitest run --coverage",
+    "coverage": "vitest run --coverage && rm -rf coverage",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "remove": "rm -rf lib node_modules pnpm-lock.yaml",
@@ -30,7 +23,7 @@
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
     "eslint": "eslint \"{src/**/*,App}.{ts,tsx}\"",
     "lint": "pnpm run prettier && pnpm run eslint --fix",
-    "lint-watch": "onchange --await-write-finish 5500 \"**/*\" -- pnpm run lint",
+    "lint-watch": "onchange -d 1000 --await-write-finish 5500 \"**/*\" -- pnpm run lint",
     "postpublish": "git fetch & git pull",
     "prepublishOnly": "pnpm run build && pnpm run lint"
   },
@@ -41,11 +34,13 @@
   },
   "name": "@bemedev/rx-addons",
   "author": "chlbri",
-  "module": "lib/index.esm.js",
   "peerDependencies": {
-    "rxjs": "^7.5.6",
-    "tslib": "^2.4.0",
-    "typescript": "^4.7.4"
+    "rxjs": "^7.5.6"
+  },
+  "peerDependenciesMeta": {
+    "rxjs": {
+      "optional": false
+    }
   },
   "devDependencies": {
     "@types/node": "^18.7.6",
@@ -53,11 +48,15 @@
     "@typescript-eslint/parser": "^5.33.1",
     "@vitest/coverage-c8": "^0.22.1",
     "@vitest/ui": "^0.22.1",
+    "esbuild": "^0.15.5",
     "eslint": "^8.22.0",
     "husky": "^8.0.1",
     "microbundle": "^0.15.1",
     "onchange": "^7.1.0",
     "prettier": "^2.7.1",
+    "rollup": "^2.78.1",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-esbuild": "^4.9.3",
     "rxjs": "^7.5.6",
     "size-limit": "^8.0.1",
     "tslib": "^2.4.0",
@@ -67,6 +66,10 @@
   },
   "wallaby": {
     "slowTestThreshold": 200,
-    "runMode": "onSave"
+    "runMode": "onSave",
+    "hints": {
+      "ignoreCoverageForFile": "/ignore file coverage/",
+      "ignoreCoverage": "/ignore coverage/"
+    }
   }
 }
